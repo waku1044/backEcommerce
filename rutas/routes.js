@@ -54,28 +54,27 @@ const modeloProducto = mongoose.model("producto", eschemaProducto);
 // });
 
 route.post("/register", (req, res) => {
-  modeloUsuario
-    .find({ user: req.body.user })
-    .then((user) => {
-      res.send("El usuarioo ya existe");
-    })
-    .catch((err) => {
-      const nuevoUsuario = new modeloUsuario(req.body);
-      if (nuevoUsuario.user == "" || nuevoUsuario.pass == "") {
-        res.json({
-          success: false,
-          message: "Por favor rellene todos los campos",
-        });
-      } else if (
-        nuevoUsuario.user.length < 4 ||
-        nuevoUsuario.pass.length > 10
-      ) {
-        res.send("El usuario debe tener entre 4 y 10 caracteres");
-      } else {
-        nuevoUsuario.save();
-        res.send("Se agrego un usuario");
-      }
+  const { user, pass } = req.body;
+ 
+  if(user == null || pass == null){
+    res.json({
+      success: false,
+      message: "Por favor rellene todos los campos",
     });
+    }if(!(user.length > 3 && user.length < 11)){
+      console.log(user.length > 3);
+      res.json({
+        success: false,
+        message:"El usuario debe tener entre 4 y 10 caracteres" });
+    }else {
+      const nuevoUsuario = new modeloUsuario({
+        user: user,
+        pass: pass,
+      });
+          nuevoUsuario.save();
+          res.json({success: true,
+          message: "Se agrego un usuario"});
+        }
 });
 route.post("/login", (req, res) => {
   modeloUsuario
@@ -99,9 +98,9 @@ route.post("/login", (req, res) => {
 route.post("/agregarproducto", async (req, res) => {
   // console.log(req.body);
   // res.send(res.body)
-  const {nombre, precio} = req.body;
+  const { img ,nombre,precio, descripcion, categoria, idproducto, hora , fecha } = req.body;
   
-  if(nombre && precio){
+  if(img && nombre && precio && descripcion && categoria && idproducto && hora && fecha){
     const nuevoProducto = new modeloProducto(req.body);
     const response = await nuevoProducto.save();
     res.send({message:"Se agrego el producto"});
@@ -109,7 +108,7 @@ route.post("/agregarproducto", async (req, res) => {
     
   }else{
     console.log("No se agrego el producto");
-    // res.send({menssage:"No se agrego el producto"});
+    res.send({menssage:"No se agrego el producto"});
   }
 })
 
@@ -120,6 +119,7 @@ route.get("/mostrarproductos", (req, res) => {
       if(productos.length > 0){
 
         res.json(productos);
+        console.log(productos._id);
         // console.log(productos.filter(producto=> producto.categoria == 'Diversos'?producto : null));
       }else{
         res.send("No existen productos"); 

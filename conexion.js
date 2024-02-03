@@ -1,7 +1,8 @@
 // const mongoose = require('mongoose');
 require ('dotenv').config();
 const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGO)    
+const conex = process.env.MONGO || 'mongodb://127.0.0.1:27017/e-commerce';
+mongoose.connect(conex);  
 
 // const objetdb = mongoose.connection
 const objetdb = mongoose.connection;
