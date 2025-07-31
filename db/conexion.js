@@ -1,5 +1,5 @@
-require('dotenv').config(); // Cargar variables de entorno
-const mongoose = require('mongoose');
+import 'dotenv/config'; // Cargar variables de entorno
+import mongoose from'mongoose';
 
 // Obtener la URL de conexión de MongoDB desde el archivo .env
 const conex = process.env.MONGO ;

@@ -1,4 +1,5 @@
-const bcrypt =  require('bcrypt');
+import bcrypt from 'bcrypt';
+import modeloUsuario from '../models/clients.modules.js';
 
 module.exports =  registro = async (req, res) => {
   const { user, pass } = req.body;
@@ -20,7 +21,7 @@ module.exports =  registro = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(pass, 10);
 
-    const nuevoUsuario = new modeloUsuario({
+    const nuevoUsuario = new modeloUsuari({
       user,
       pass: hashedPassword,
     });

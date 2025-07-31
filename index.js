@@ -1,21 +1,21 @@
-
-const express = require('express');
-const app = express();
-const cors = require('cors');
-
-const port = process.env.PORT || 3000 ;
-// Habilitar CORS para todas las rutas
-
+import express from "express";
+import cors from 'cors';
 // Importacion del archivo de rutas y modelo usuario
 // const rutaUsuario = require('./backend/usuario');
 // server.use('/api/usuario', rutaUsuario);
-const rutasProducts = require('./rutas/products.routes.js');
-const rutasClients = require('./rutas/clients.routes.js');
+import rutasProducts from './rutas/products.routes.js';
+import rutasClients from './rutas/clients.routes.js';
 
 //Esto es lo que nos hacve conectar a la base de mongodb
 // Importar conexion MongoDB
 // const archivoDB = require("./conexion");
-const archivodb = require('./db/conexion.js');
+import archivodb from './db/conexion.js';
+archivodb()
+const app = express();
+const port = process.env.PORT || 3000 ;
+// Habilitar CORS para todas las rutas
+
+
 
 app.use(express.json());
 app.use(cors());

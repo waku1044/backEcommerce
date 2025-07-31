@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express";
+import  registro from '../controllers/clients.controllers.js';
+import login from '../controllers/clients.controllers.js';
 const route = express.Router();
-const registro = require('../controllers/clients.controllers.js');
-const login = require('../controllers/clients.controllers.js');
 
 route.post("/register", registro);
 route.post("/login",login);
