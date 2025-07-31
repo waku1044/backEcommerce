@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import modeloUsuario from '../models/clients.modules.js';
 
-module.exports =  registro = async (req, res) => {
+export const registro = async (req, res) => {
   const { user, pass } = req.body;
 
   try {
@@ -21,7 +21,7 @@ module.exports =  registro = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(pass, 10);
 
-    const nuevoUsuario = new modeloUsuari({
+    const nuevoUsuario = new modeloUsuario({
       user,
       pass: hashedPassword,
     });
@@ -42,7 +42,7 @@ module.exports =  registro = async (req, res) => {
 };
 
 
-module.exports = login =  (req, res) => {
+export const login =  (req, res) => {
     try {
         
         modeloUsuario
@@ -64,4 +64,6 @@ module.exports = login =  (req, res) => {
     } catch (error) {
         return res.status(500).json({message:'Error en servidor', error})
     }
-  }
+  };
+
+

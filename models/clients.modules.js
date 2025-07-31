@@ -11,4 +11,4 @@ const eschemaUsuario = new schema({
 
 const modeloUsuario = mongoose.model("usuario", eschemaUsuario);
 
-module.export = modeloUsuario;
+export default modeloUsuario;

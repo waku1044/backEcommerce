@@ -74,4 +74,4 @@ route.delete("/eliminarproducto/:id", (req, res) => {
     });
 });
 
-module.exports = route;
+export default route;

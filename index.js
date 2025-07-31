@@ -10,7 +10,7 @@ import rutasClients from './rutas/clients.routes.js';
 // Importar conexion MongoDB
 // const archivoDB = require("./conexion");
 import archivodb from './db/conexion.js';
-archivodb()
+archivodb
 const app = express();
 const port = process.env.PORT || 3000 ;
 // Habilitar CORS para todas las rutas

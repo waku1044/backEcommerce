@@ -15,4 +15,4 @@ mongoose.connect(conex)
 });
 
 // Exportar mongoose para su uso en otros archivos
-module.exports = mongoose;
+export default mongoose;
