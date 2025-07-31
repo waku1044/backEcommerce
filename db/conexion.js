@@ -1,18 +1,15 @@
-import 'dotenv/config'; // Cargar variables de entorno
-import mongoose from'mongoose';
+// db/conexion.js
+import 'dotenv/config';
+import mongoose from 'mongoose';
 
-// Obtener la URL de conexión de MongoDB desde el archivo .env
-const conex = process.env.MONGO ;
+const conectarDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO);
+    console.log('✅ Conexión exitosa a MongoDB');
+  } catch (error) {
+    console.error('❌ Error al conectar a MongoDB:', error);
+    process.exit(1);
+  }
+};
 
-// Realizar la conexión a MongoDB
-mongoose.connect(conex)
-.then(() => {
-    console.log('Conexión exitosa a MongoDB');
-})
-.catch((error) => {
-    console.error('Error al conectar a MongoDB:', error);
-    process.exit(1); // Termina el proceso si hay un error
-});
-
-// Exportar mongoose para su uso en otros archivos
-export default mongoose;
+export default conectarDB;

@@ -9,8 +9,9 @@ import rutasClients from './rutas/clients.routes.js';
 //Esto es lo que nos hacve conectar a la base de mongodb
 // Importar conexion MongoDB
 // const archivoDB = require("./conexion");
-import archivodb from './db/conexion.js';
-archivodb
+import conectarDB from './db/conexion.js';
+await conectarDB();
+
 const app = express();
 const port = process.env.PORT || 3000 ;
 // Habilitar CORS para todas las rutas
