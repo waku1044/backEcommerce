@@ -1,15 +1,16 @@
 import express from "express";
 const route = express.Router();
+import modeloProducto from '../models/products.modules.js';
 
 
 route.post("/agregarproducto", async (req, res) => {
   
-  const { img ,nombre,precio, descripcion, categoria, idproducto, hora , fecha } = req.body;
+  const { img ,nombre,precio, descripcion, categoria } = req.body;
   
-  if(img && nombre && precio && descripcion && categoria && idproducto && hora && fecha){
+  if(img && nombre && precio && descripcion && categoria){
     const nuevoProducto = new modeloProducto(req.body);
     const response = await nuevoProducto.save();
-    res.send({message:"Se agrego el producto"});
+    res.send({message:"Se agrego el producto",payload:response});
     console.log("Se agrego el producto");
     
   }else{
