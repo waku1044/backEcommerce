@@ -19,7 +19,11 @@ const port = process.env.PORT || 3000 ;
 
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173', // Permite solicitudes solo desde este dominio
+    methods: ['GET', 'POST', 'OPTIONS'], // Permite estos métodos
+    allowedHeaders: ['Content-Type', 'Authorization'], // Permite estos encabezados
+  }));
 
 
 
@@ -30,27 +34,3 @@ app.use('/api', rutasProducts);
 app.listen(port, () => {
     console.log(`Servidor corriendo en puerto ${port}!`);    
 })
-
-
-
-
-
-
-
-
-
-
-// Importar Body-parser
-// const bodyParser = require('body-parser');
-// server.use(bodyParser.json());
-// server.use(bodyParser.urlencoded({extended:'true'}));
-
-
-// Configurar las rutas '/' es la principal
-// server.get("/", (req, res) => {
-//   res.end("<h1>Mensaje de NodeJS y Express</h1>");
-// });
-// // Configurar servidor basico = levanta servidor en porto 5000
-// server.listen(5000, () => {
-//   console.log("El servidor NodeJS esta corriendo ok.");
-// });
