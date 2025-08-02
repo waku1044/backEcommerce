@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
@@ -20,6 +20,7 @@
     "proyecto-e-commerce": "file:"
   },
   "devDependencies": {
+    "@types/express": "^5.0.3",
     "nodemon": "^3.1.10"
   }
 }
