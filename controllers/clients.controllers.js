@@ -42,28 +42,43 @@ export const registro = async (req, res) => {
 };
 
 
-export const login =  (req, res) => {
-    try {
-        
-        modeloUsuario
-          .find({ user: req.body.user, pass: req.body.pass })
-          .then((user) => {
-            return res.status(200).json({
-              id: user[0].id,
-              success: true,
-              message: "Ingresando...",
-              user: user[0].user,
-            });
-          })
-          .catch((error) => {
-           return  res.status(404).json({
-              success: false,
-              message: "Usuario o contraseña incorrectos",
-            });
-          });
-    } catch (error) {
-        return res.status(500).json({message:'Error en servidor', error})
+export const login = async (req, res) => {
+  try {
+    // Buscar el usuario en la base de datos por el nombre de usuario
+    const user = await modeloUsuario.findOne({ user: req.body.user });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "Usuario no encontrado",
+      });
     }
-  };
+
+    // Comparar la contraseña proporcionada con la almacenada en la base de datos
+    const passwordMatch = await bcrypt.compare(req.body.pass, user.pass);
+
+    if (!passwordMatch) {
+      return res.status(404).json({
+        success: false,
+        message: "Contraseña incorrecta",
+      });
+    }
+
+    // Si todo es correcto, se responde con los datos del usuario
+    return res.status(200).json({
+      id: user.id,
+      success: true,
+      message: "Ingresando...",
+      user: user.user,
+    });
+    
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Error en servidor',
+      error,
+    });
+  }
+};
 
 
