@@ -54,7 +54,7 @@ export const login = async (req, res) => {
       });
     }
 
-    // Comparar la contraseña proporcionada con la almacenada en la base de datos
+    // Comparar la contraseña proporcionada con la almacenada en la base de datos probando no agarraba await
     const passwordMatch = await bcrypt.compare(req.body.pass, user.pass);
 
     if (!passwordMatch) {
