@@ -19,11 +19,7 @@ const port = process.env.PORT || 3000 ;
 
 
 app.use(express.json());
-app.use(cors({
-    origin: 'http://localhost:5173', // Permite solicitudes solo desde este dominio
-    methods: ['GET', 'POST', 'OPTIONS'], // Permite estos métodos
-    allowedHeaders: ['Content-Type', 'Authorization'], // Permite estos encabezados
-  }));
+app.use(cors());
 
 
 
