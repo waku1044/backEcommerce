@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 
 const conectarDB = async () => {
 
-console.log(procesos.env.MONGO);
+console.log(process.env.MONGO);
   try {
     await mongoose.connect(process.env.MONGO);
     console.log('✅ Conexión exitosa a MongoDB');
